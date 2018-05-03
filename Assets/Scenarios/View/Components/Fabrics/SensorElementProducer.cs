@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GreenhouseUI {
+  [RequireComponent(typeof(ElementProducer))]
   public class SensorElementProducer : MonoBehaviour
   {
     public void Produce(GameObject element, ISensorElement data)
     {
+      this.GetComponent<ElementProducer>().Produce(element, data);
       switch (data.Role) {
         case SensorElementRole.GROUND_TEMPERATURE:
           SetContent(

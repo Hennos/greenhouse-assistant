@@ -4,44 +4,46 @@ using System.Linq;
 using UnityEngine;
 
 namespace GreenhouseUI.Components {
-  [RequireComponent(typeof(GroupsList))]
+  [RequireComponent(typeof(UnityElementsList))]
   [RequireComponent(typeof(CustomGroupProducer))]
   public class CustomGroupsList : MonoBehaviour
   {
-    [SerializeField] private GameObject prefabCustomGroup;
+    private IUnityElementsList m_list;
 
-    public GroupsList List
-    {
+    [SerializeField] private GameObject prefabElement;
+
+    public IUnityElementsList List { 
       get {
-        return this.GetComponent<GroupsList>();
+        if (m_list == null) {
+          m_list = this.GetComponent<UnityElementsList>();
+        }
+        return m_list;
       }
     }
 
-    public void UpdateList(Dictionary<string, ViewModel.IGroup> groups)
+    public void UpdateList(Dictionary<string, ViewModel.IGroup> elements) 
     {
-      List<string> oldGroupsNames = List.Groups;
-      List<string> currentGroupsNames = groups.Keys.ToList();
+      IEnumerable<string> oldElementsNames = List.Elements;
+      IEnumerable<string> currentElementsNames = elements.Keys;
 
-      var updated = oldGroupsNames.Intersect(currentGroupsNames).ToList();
-      updated.ForEach(
-        id => {
-          var gameObject = List.Get(id);
-          this.GetComponent<CustomGroupProducer>().Produce(gameObject);
-        }
-      );
+      var added = currentElementsNames.Except(oldElementsNames);
+      foreach (string id in added) {
+        var gameObject = Instantiate(prefabElement) as GameObject;
+        var data = elements[id];
+        List.Add(id, gameObject);
+        this.GetComponent<CustomGroupProducer>().Produce(gameObject, data);
+      }
 
-      var deleted = oldGroupsNames.Except(currentGroupsNames).ToList();
-      deleted.ForEach(name => List.Remove(name));
+      var updated = oldElementsNames.Intersect(currentElementsNames);
+      foreach (string id in updated) {
+        var gameObject = List.Get(id);
+        this.GetComponent<CustomGroupProducer>().Produce(gameObject, elements[id]);
+      }
 
-      var added = currentGroupsNames.Except(oldGroupsNames).ToList();
-      added.ForEach(
-        name => {
-          var gameObject = Instantiate(prefabCustomGroup) as GameObject;
-          var data = groups[name];
-          List.Add(gameObject, data);
-          this.GetComponent<CustomGroupProducer>().Produce(gameObject);
-        }
-      );
+      var deleted = oldElementsNames.Except(currentElementsNames);
+      foreach (string id in deleted) {
+        List.Remove(id);
+      }
     }
   }
 }
