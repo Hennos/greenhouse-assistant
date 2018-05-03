@@ -1,32 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GreenhouseUI {
-  [RequireComponent(typeof(ButtonsGroup))]
   public class SectionButtons : MonoBehaviour
   {
-    private Dictionary<SectionState, string> m_sections = new Dictionary<SectionState, string> 
-    {
-      { SectionState.MAIN_SECTION, "Controlls" },
-      { SectionState.ANALYTICS_SECTION, "Analytics" },
-      { SectionState.SETTING_SECTION, "Settings" },
-    };
+    [SerializeField] private ButtonsList list;
 
     private void Start()
     {
-      CreateButton(SectionState.MAIN_SECTION);
-      CreateButton(SectionState.ANALYTICS_SECTION);
-      CreateButton(SectionState.SETTING_SECTION);
+      CreateButtons();
     }
 
-    private void CreateButton(SectionState buttonType) {
-      this.GetComponent<ButtonsGroup>().AddButton(m_sections[buttonType], () => OnChooseSection(buttonType));
+    private void CreateButtons() {
+      CreateButton("Controlls", SectionState.MAIN_SECTION);
+      CreateButton("Analytics", SectionState.ANALYTICS_SECTION);
+      CreateButton("Settings", SectionState.SETTING_SECTION);
     }
 
-    private void OnChooseSection(SectionState section)
+    private void CreateButton(string buttonTitle, SectionState sectionType) {
+      list.AddButton(buttonTitle, () => OnChooseSection(sectionType));
+    }
+
+    private void OnChooseSection(SectionState sectionArea)
     {
-      Messenger<SectionState>.Broadcast(UIEvent.SECTION_PUSH_CHOOSED, section);
+      Messenger<SectionState>.Broadcast(UIEvent.SECTION_PUSH_CHOOSED, sectionArea);
     }
   }
 }

@@ -23,14 +23,27 @@ GameObject:
   - component: {fileID: 114675101112760602}
   - component: {fileID: 114574993760612444}
   - component: {fileID: 114375857673172258}
-  - component: {fileID: 114391678300359824}
+  - component: {fileID: 114156524403933124}
+  - component: {fileID: 114635092104660210}
   m_Layer: 5
-  m_Name: ButtonsGroup
+  m_Name: ButtonsList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114156524403933124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1807166736619382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab4e4c3d29602144914f384d095b355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootTransform: {fileID: 224258678331455280}
 --- !u!114 &114375857673172258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,20 +55,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0440f5663e97d4488a6a87aa325165d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114391678300359824
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1807166736619382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdde0646d9e40b7498ade8044e35cc1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rootTransform: {fileID: 224258678331455280}
-  prefabButton: {fileID: 1143169398304236, guid: 4d928e3dc588fa240a409a7857da76a9,
-    type: 2}
 --- !u!114 &114574993760612444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,6 +77,19 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &114635092104660210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1807166736619382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c387f4237d9a444dbbb18642193a38e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabElement: {fileID: 1143169398304236, guid: 4d928e3dc588fa240a409a7857da76a9,
+    type: 2}
 --- !u!114 &114675101112760602
 MonoBehaviour:
   m_ObjectHideFlags: 1

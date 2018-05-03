@@ -24,6 +24,7 @@ namespace GreenhouseUI.Components {
     public void Render(IFoundDevice data)
     {
       title.text = data.Name;
+      UpdateStatus(Choosed);
     }
 
     private void HandleClick()
