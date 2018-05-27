@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // TODO: Перенести состояние из контроллера в отдельный компонент, близкий к ViewModel
+// TODO: Вынести состояние из контроллеров в ViewModel
 namespace GreenhouseUI {
   public enum SectionState {
     MAIN_SECTION,

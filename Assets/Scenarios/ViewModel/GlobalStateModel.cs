@@ -5,7 +5,7 @@ namespace GreenhouseUI.ViewModel {
   public class GlobalStateModel : MonoBehaviour, IGlobalStateModel
   {
     private StateContainer<GlobalState, GlobalStateConstraints> m_state = 
-      StateContainer.Create(GlobalState.READY, new GlobalStateConstraints(GlobalStateMap.Map));
+      StateContainer.Create(GlobalState.CHOOSE_DEVICE, new GlobalStateConstraints(GlobalStateMap.Map));
 
     public GlobalState State {
       get {

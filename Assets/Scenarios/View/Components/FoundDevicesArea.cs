@@ -2,6 +2,7 @@
 using UnityEngine;
 
 namespace GreenhouseUI {
+  [RequireComponent(typeof(ViewModel.ModelReference))]
   public class FoundDevicesArea : MonoBehaviour
   {
     private ViewModel.IFoundDeviceModel m_data;
@@ -21,7 +22,7 @@ namespace GreenhouseUI {
 
     private void Start()
     {
-      list.UpdateList(m_data.FoundDevices);
+      Messenger.Broadcast(UIEvent.START_SEARCH_DEVICES);
     }
 
     private void OnUpdateState()
@@ -30,4 +31,3 @@ namespace GreenhouseUI {
     }
   }
 }
-

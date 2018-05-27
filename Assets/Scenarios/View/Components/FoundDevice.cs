@@ -7,46 +7,30 @@ namespace GreenhouseUI.Components {
   [RequireComponent(typeof(Button))]
   public class FoundDevice : MonoBehaviour
   {
-    private bool choosed = false;
+    private IFoundDevice _data;
 
     [SerializeField] private Text title;
-    [SerializeField] private Image status;
     [SerializeField] private Button button;
-
-    public bool Choosed { 
-      get { return choosed; }
-      private set {
-        choosed = value;
-        UpdateStatus(value);
-      }
-    }
 
     public void Render(IFoundDevice data)
     {
+      _data = data;
       title.text = data.Name;
-      UpdateStatus(Choosed);
-    }
-
-    private void HandleClick()
-    {
-      Choosed = !Choosed;
-    }
-
-    private void UpdateStatus(bool value)
-    {
-      Color current = status.color;
-      current.a = value ? 1f : 0f;
-      status.color = current;
     }
 
     private void OnEnable()
     {
-      button.onClick.AddListener(HandleClick);
+      button.onClick.AddListener(OnChoose);
     }
 
     private void OnDisable()
     {
-      button.onClick.RemoveListener(HandleClick);
+      button.onClick.RemoveListener(OnChoose);
+    }
+
+    private void OnChoose()
+    {
+      Messenger<IFoundDevice>.Broadcast(UIEvent.PUSH_CHOOSE_DEVICE, _data);
     }
   }
 }

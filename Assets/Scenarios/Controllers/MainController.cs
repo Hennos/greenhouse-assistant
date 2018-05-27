@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+// TODO: Выделить функции контроллеров в отдельные сервисы, обладающие единичной ответственностью
+// TODO: Сделать сервис для работы с BLE;
 namespace GreenhouseUI {
   public class MainController : MonoBehaviour
   {
@@ -15,13 +18,13 @@ namespace GreenhouseUI {
     private void OnEnable()
     {
       Messenger.AddListener(UIEvent.REQUEST_MODEL_DATA, OnRequestModelData);
-      Messenger<List<IFoundDevice>>.AddListener(UIEvent.PUSH_FOUND_DEVICES, OnPushFoundDevices);
+      Messenger<IEnumerable<IFoundDevice>>.AddListener(UIEvent.PUSH_FOUND_DEVICES, OnPushFoundDevices);
     }
 
     private void OnDisable()
     {
       Messenger.RemoveListener(UIEvent.REQUEST_MODEL_DATA, OnRequestModelData);
-      Messenger<List<IFoundDevice>>.RemoveListener(UIEvent.PUSH_FOUND_DEVICES, OnPushFoundDevices);
+      Messenger<IEnumerable<IFoundDevice>>.RemoveListener(UIEvent.PUSH_FOUND_DEVICES, OnPushFoundDevices);
     }
 
     private void OnRequestModelData()
@@ -29,9 +32,9 @@ namespace GreenhouseUI {
       RequestRemoteData();
     }
 
-    private void OnPushFoundDevices(List<IFoundDevice> devices)
+    private void OnPushFoundDevices(IEnumerable<IFoundDevice> devices)
     {
-      model.FoundDevices = devices;
+      model.FoundDevices = devices.ToList();
     }
 
     private void RequestRemoteData()
@@ -95,6 +98,5 @@ namespace GreenhouseUI {
       model.Sensors = sensors;
       model.Regulators = regulators;
     }
-
   }
 }
