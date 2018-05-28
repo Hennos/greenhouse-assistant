@@ -30,7 +30,7 @@ namespace GreenhouseUI.Components {
 
     private void OnChoose()
     {
-      Messenger<IFoundDevice>.Broadcast(UIEvent.PUSH_CHOOSE_DEVICE, _data);
+      Messenger<IFoundDevice>.Broadcast(UIEvent.PUSH_CHOOSED_DEVICE, _data);
     }
   }
 }

@@ -6,19 +6,21 @@ using UnityEngine;
 namespace GreenhouseUI {
   public class ChooseDeviceController : MonoBehaviour
   {
+    [SerializeField] MainController mainController;
+
     private void OnEnable()
     {
-      Messenger<IFoundDevice>.AddListener(UIEvent.PUSH_CHOOSE_DEVICE, OnChooseDevice);
+      Messenger<IFoundDevice>.AddListener(UIEvent.PUSH_CHOOSED_DEVICE, OnChooseDevice);
     }
 
     private void OnDisable()
     {
-      Messenger<IFoundDevice>.RemoveListener(UIEvent.PUSH_CHOOSE_DEVICE, OnChooseDevice);
+      Messenger<IFoundDevice>.RemoveListener(UIEvent.PUSH_CHOOSED_DEVICE, OnChooseDevice);
     }
 
     private void OnChooseDevice(IFoundDevice choosed)
     {
-      Messenger<IFoundDevice>.Broadcast(UIEvent.REQUEST_CHOOSED_DEVICE_DATA, choosed);
+      mainController.RequestDeviceData(choosed);
     }
   }
 }

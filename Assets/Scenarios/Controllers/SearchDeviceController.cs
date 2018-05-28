@@ -21,6 +21,8 @@ namespace GreenhouseUI {
 
     private Coroutine _watchFoundDevice;
 
+    [SerializeField] MainController mainController;
+
     private void Awake()
     {
       _stream = CreateStateStream();
@@ -68,7 +70,7 @@ namespace GreenhouseUI {
     {
       for (;;)
       {
-        Messenger<IEnumerable<IFoundDevice>>.Broadcast(UIEvent.PUSH_FOUND_DEVICES, _service.Devices);
+        mainController.SetFoundDevices(_service.Devices);
         yield return new WaitForSeconds(10f);
       }
     }

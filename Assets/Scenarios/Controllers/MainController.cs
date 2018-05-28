@@ -13,24 +13,12 @@ namespace GreenhouseUI {
       model = Model.Create(ObservableDataStrategy.Instance);
     }
 
-    private void OnEnable()
-    {
-      Messenger<IEnumerable<IFoundDevice>>.AddListener(UIEvent.PUSH_FOUND_DEVICES, OnPushFoundDevices);
-      Messenger<IFoundDevice>.AddListener(UIEvent.REQUEST_CHOOSED_DEVICE_DATA, OnRequestChoosedDeviceData);
-    }
-
-    private void OnDisable()
-    {
-      Messenger<IEnumerable<IFoundDevice>>.RemoveListener(UIEvent.PUSH_FOUND_DEVICES, OnPushFoundDevices);
-      Messenger<IFoundDevice>.RemoveListener(UIEvent.REQUEST_CHOOSED_DEVICE_DATA, OnRequestChoosedDeviceData);
-    }
-
-    private void OnPushFoundDevices(IEnumerable<IFoundDevice> devices)
+    public void SetFoundDevices(IEnumerable<IFoundDevice> devices)
     {
       model.FoundDevices = devices.ToList();
     }
 
-    private void OnRequestChoosedDeviceData(IFoundDevice device)
+    public void RequestDeviceData(IFoundDevice device)
     {
       Messenger<ViewModel.GlobalState>.Broadcast(UIEvent.SET_APP_STATE, ViewModel.GlobalState.READY);
       Messenger.Broadcast(UIEvent.STOP_SEARCH_DEVICES);
