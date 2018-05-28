@@ -18,7 +18,7 @@ namespace GreenhouseUI {
 
     private void OnChooseDevice(IFoundDevice choosed)
     {
-      Messenger<IFoundDevice>.Broadcast(UIEvent.SET_CHOOSED_DEVICE, choosed);
+      Messenger<IFoundDevice>.Broadcast(UIEvent.REQUEST_CHOOSED_DEVICE_DATA, choosed);
     }
   }
 }

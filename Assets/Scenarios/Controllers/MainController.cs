@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-// TODO: Выделить функции контроллеров в отдельные сервисы, обладающие единичной ответственностью
-// TODO: Сделать сервис для работы с BLE;
 namespace GreenhouseUI {
   public class MainController : MonoBehaviour
   {
@@ -17,24 +15,26 @@ namespace GreenhouseUI {
 
     private void OnEnable()
     {
-      Messenger.AddListener(UIEvent.REQUEST_MODEL_DATA, OnRequestModelData);
       Messenger<IEnumerable<IFoundDevice>>.AddListener(UIEvent.PUSH_FOUND_DEVICES, OnPushFoundDevices);
+      Messenger<IFoundDevice>.AddListener(UIEvent.REQUEST_CHOOSED_DEVICE_DATA, OnRequestChoosedDeviceData);
     }
 
     private void OnDisable()
     {
-      Messenger.RemoveListener(UIEvent.REQUEST_MODEL_DATA, OnRequestModelData);
       Messenger<IEnumerable<IFoundDevice>>.RemoveListener(UIEvent.PUSH_FOUND_DEVICES, OnPushFoundDevices);
-    }
-
-    private void OnRequestModelData()
-    {
-      RequestRemoteData();
+      Messenger<IFoundDevice>.RemoveListener(UIEvent.REQUEST_CHOOSED_DEVICE_DATA, OnRequestChoosedDeviceData);
     }
 
     private void OnPushFoundDevices(IEnumerable<IFoundDevice> devices)
     {
       model.FoundDevices = devices.ToList();
+    }
+
+    private void OnRequestChoosedDeviceData(IFoundDevice device)
+    {
+      Messenger<ViewModel.GlobalState>.Broadcast(UIEvent.SET_APP_STATE, ViewModel.GlobalState.READY);
+      Messenger.Broadcast(UIEvent.STOP_SEARCH_DEVICES);
+      RequestRemoteData();
     }
 
     private void RequestRemoteData()

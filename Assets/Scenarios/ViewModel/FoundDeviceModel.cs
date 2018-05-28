@@ -21,12 +21,12 @@ namespace GreenhouseUI.ViewModel {
 
     private void OnEnable()
     {
-      Messenger<List<IFoundDevice>>.AddListener(DataEvent<List<IFoundDevice>>.SET_MODEL_DATA, OnSetData);
+      Messenger<List<IFoundDevice>>.AddListener(SET_DATA, OnSetData);
     }
 
     private void OnDisable()
     {
-      Messenger<List<IFoundDevice>>.RemoveListener(DataEvent<List<IFoundDevice>>.SET_MODEL_DATA, OnSetData);
+      Messenger<List<IFoundDevice>>.RemoveListener(SET_DATA, OnSetData);
     }
 
     private void OnSetData(List<IFoundDevice> devices)
@@ -42,4 +42,3 @@ namespace GreenhouseUI.ViewModel {
     }
   }
 }
-

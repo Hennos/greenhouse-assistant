@@ -47,16 +47,9 @@ namespace GreenhouseUI {
       Messenger.RemoveListener(UIEvent.STOP_SEARCH_DEVICES, OnStopSearching);
     }
 
-    private void Start()
-    {
-      Debug.Assert(_stream.Current.State == SearchDeviceState.RUN_SERVICE);
-    }
-
     private void OnStartSearching()
     {
       PushNextState(SearchDeviceState.START_SEARCHING);
-
-      Debug.Assert(_stream.Current.State == SearchDeviceState.START_SEARCHING);
 
       if (_watchFoundDevice == null) {
         _watchFoundDevice = StartCoroutine("WatchFoundDevice");
@@ -66,8 +59,6 @@ namespace GreenhouseUI {
     private void OnStopSearching()
     {
       PushNextState(SearchDeviceState.STOP_SEARCHING);
-
-      Debug.Assert(_stream.Current.State == SearchDeviceState.STOP_SEARCHING);
 
       StopCoroutine(_watchFoundDevice);
       _watchFoundDevice = null;

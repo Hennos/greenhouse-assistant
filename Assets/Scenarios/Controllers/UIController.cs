@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GreenhouseUI {
   public class UIController : MonoBehaviour
   {
-     private void Start()
+    private void Start()
     {
       SetApplicationData();
     }

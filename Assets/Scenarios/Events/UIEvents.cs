@@ -11,7 +11,7 @@ namespace GreenhouseUI {
     public static string FOUND_DEVICE_CHANGED = "FOUND_DEVICE_CHANGED";
 
     public static string PUSH_CHOOSE_DEVICE = "PUSH_CHOOSE_DEVICE";
-    public static string SET_CHOOSED_DEVICE = "SET_CHOOSED_DEVICE";
+    public static string REQUEST_CHOOSED_DEVICE_DATA = "REQUEST_CHOOSED_DEVICE_DATA";
 
     public static string APP_STATE_CHANGED = "APP_STATE_CHANGED";
     public static string SET_MODEL_DATA = "SET_MODEL_DATA";

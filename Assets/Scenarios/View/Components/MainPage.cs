@@ -35,11 +35,6 @@ namespace GreenhouseUI {
       Messenger.RemoveListener(UIEvent.SECTION_STATE_CHANGED, OnSectionChanged);
     }
 
-    private void Start()
-    {
-      Messenger.Broadcast(UIEvent.REQUEST_MODEL_DATA);
-    }
-
     private void OnSectionChanged() {
       RenderPage(m_pages[m_controller.State]);
     }

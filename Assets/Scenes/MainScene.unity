@@ -471,7 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootTransform: {fileID: 2062636944}
   pageMain: {fileID: 1204054073331230, guid: 2cd02cf22d0895d49b94f62776a675df, type: 2}
-  pageChooseDevices: {fileID: 1084558965383832, guid: 0a629b24700592f4681c209f970ada6c,
+  pageFoundDevice: {fileID: 1798173422116526, guid: 7288840c74688214793f0b874c17a37f,
     type: 2}
   pageAuthorize: {fileID: 0}
 --- !u!114 &845296951
